@@ -11,9 +11,9 @@ template = PromptTemplate(
     template="Hi!! I'm {name}, tell me a joke about my name"
 )
 
-text = template.format(name="Wellinton")
-
-
 model = ChatGoogleGenerativeAI(model="gemini-2.5-pro", temperature=0.5)
-result = model.invoke(text)
+chain = template | model
+
+
+result = chain.invoke({"name": "Wellinton"})
 print(result.content)
